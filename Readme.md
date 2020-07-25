@@ -15,6 +15,8 @@ Wayland recorder https://askubuntu.com/questions/919807/how-to-change-screencast
 
 /org/gnome/settings-daemon/plugins/media-keys/max-screencast-length
 
+Dconf-Editor gui schemas run edit
+
 Use default value - OFF  
 
 Costum value 1800  - 30 min example
