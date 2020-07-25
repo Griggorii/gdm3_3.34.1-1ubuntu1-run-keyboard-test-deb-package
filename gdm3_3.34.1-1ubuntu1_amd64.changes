@@ -1,0 +1,90 @@
+Format: 1.8
+Date: Mon, 07 Oct 2019 17:23:07 +0100
+Source: gdm3
+Binary: gdm3 gir1.2-gdm-1.0 libgdm-dev libgdm1
+Architecture: amd64
+Version: 3.34.1-1ubuntu1
+Distribution: eoan
+Urgency: medium
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Changed-By: Iain Lane <iain.lane@canonical.com>
+Description:
+ gdm3       - GNOME Display Manager
+ gir1.2-gdm-1.0 - GObject introspection data for the GNOME Display Manager
+ libgdm-dev - GNOME Display Manager (development files)
+ libgdm1    - GNOME Display Manager (shared library)
+Changes:
+ gdm3 (3.34.1-1ubuntu1) eoan; urgency=medium
+ .
+   * Merge with Debian. Remaining changes:
+     + README.Debian: update for correct paths in Ubuntu
+     + control.in:
+       - Don't recommend desktop-base
+       - Depend on bash for config_error_dialog.patch
+       - Update Vcs field
+     + rules:
+       - Don't override default user/group
+       - --enable-gdm-xsession to install upstream Xsession script
+       - override dh_installinit with --no-start to avoid session being killed
+     + rules, README.Debian, gdm3.8.pod:
+       Use upstream custom.conf instead of daemon.conf
+     + gdm3.{postinst,postrm}: rename user and group back to gdm
+     + gdm3.postinst, gdm3.prerm: don't kill gdm on upgrade
+     + gdm3.*.pam: Make pam_env read ~/.pam_environment
+     + gdm3.install:
+       - Stop installing default.desktop. It adds unnecessary clutter
+         ("System Default") to the session chooser.
+       - Don't install debian/Xsession
+     + Add run_xsession.d.patch
+     + Add xresources_is_a_dir.patch
+       - Fix loading from /etc/X11/Xresources/*
+     + Add nvidia_prime.patch:
+       - Add hook to run prime-offload (as root) and prime-switch if
+         nvidia-prime is installed
+     + Add revert_override_LANG_with_accountservices.patch:
+       - On Ubuntu accountservices only stores the language and not the
+         full locale as needed by LANG.
+     + Add dont_set_language_env.patch:
+       - Don't run the set_up_session_language() function, since it
+         overrides variable values set by ~/.pam_environment
+     + Add config_error_dialog.patch:
+       - Show warning dialog in case of error in ~/.profile etc. and
+         don't let a syntax error make the login fail
+     + Add debian/patches/revert_nvidia_wayland_blacklist.patch:
+       - Don't blacklist nvidia for wayland
+     + Add gdm3.service-wait-for-drm-device-before-trying-to-start-i.patch:
+       - Wait for the first valid gdm device on pre-start
+     + Add debian/default.pa
+       - Disable Bluetooth audio devices in PulseAudio from gdm3.
+     + debian/gdm3.install
+       - Added details of the default.pa file
+     + debian/gdm3.postinst
+       - Added installation of default.pa and creation of dir if it doesn't
+         exist.
+     + debian/greeter.dconf-defaults: Don't set Debian settings in the
+       greeter's dconf DB
+Checksums-Sha1:
+ 4b0bdc91c0e7d103d82ccb83635dd2d62562dc29 899436 gdm3-dbgsym_3.34.1-1ubuntu1_amd64.ddeb
+ 0773265db266ad40cef2a76cbb30d4c659c8c4a2 21167 gdm3_3.34.1-1ubuntu1_amd64.buildinfo
+ 415e23b69d4eb0dccb6649aa0aff211edfc980f9 687252 gdm3_3.34.1-1ubuntu1_amd64.deb
+ ee0112dcef873aa787e0c1e22a83b2e8bca38744 55256 gir1.2-gdm-1.0_3.34.1-1ubuntu1_amd64.deb
+ 543f1ef28a813d44b06f04e92d04f9fb6d534c5a 76148 libgdm-dev_3.34.1-1ubuntu1_amd64.deb
+ fba656bd60b7296961e200761b459ff016095e2d 202464 libgdm1-dbgsym_3.34.1-1ubuntu1_amd64.ddeb
+ 7478b1ec931c52c1868e8e033c13935735493811 107076 libgdm1_3.34.1-1ubuntu1_amd64.deb
+Checksums-Sha256:
+ 667ccd624227a7b7f43b6008dc23dca230cd088ed3d67e20177e2823b3a77607 899436 gdm3-dbgsym_3.34.1-1ubuntu1_amd64.ddeb
+ 9222a8772ae87b04d319a39554a7a43818e1fdb511095a1fa4680066d1992aba 21167 gdm3_3.34.1-1ubuntu1_amd64.buildinfo
+ 92877df74de291929f2469a91fe59043a04d4bea525c71d844bea17454786c04 687252 gdm3_3.34.1-1ubuntu1_amd64.deb
+ 480c01f4e97a4bb3ac3b8d49751ce80cbfc1d5eee493d26159f2377403a8fb8f 55256 gir1.2-gdm-1.0_3.34.1-1ubuntu1_amd64.deb
+ aebebaf4ba87082809825768987d32b72114dceda9808126617a602013853ef2 76148 libgdm-dev_3.34.1-1ubuntu1_amd64.deb
+ 498225604c653bc6491358c88bb088dcf17dfdecefbc25924da9589e5a011fa4 202464 libgdm1-dbgsym_3.34.1-1ubuntu1_amd64.ddeb
+ 0b79fdd49144318d12b0b0526f1fc83bd78a7a21459b4c01ea077e96af00bb46 107076 libgdm1_3.34.1-1ubuntu1_amd64.deb
+Files:
+ 320e5a7eac8fc3b3d8fc01a0f8edba7b 899436 debug optional gdm3-dbgsym_3.34.1-1ubuntu1_amd64.ddeb
+ 018844623f0fca8be40154f32f79de49 21167 gnome optional gdm3_3.34.1-1ubuntu1_amd64.buildinfo
+ 1210e17d9f3ad138aa055cfa1c0bb635 687252 gnome optional gdm3_3.34.1-1ubuntu1_amd64.deb
+ 63e0920c1f987ab4e1a8fb953abfb87e 55256 introspection optional gir1.2-gdm-1.0_3.34.1-1ubuntu1_amd64.deb
+ c2380a12dee0d34080ab7047eb869d72 76148 libdevel optional libgdm-dev_3.34.1-1ubuntu1_amd64.deb
+ 0144a660935e3f35936446668156538c 202464 debug optional libgdm1-dbgsym_3.34.1-1ubuntu1_amd64.ddeb
+ d4cc0b31f1991772edfaf86c813c9436 107076 libs optional libgdm1_3.34.1-1ubuntu1_amd64.deb
+Original-Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>
