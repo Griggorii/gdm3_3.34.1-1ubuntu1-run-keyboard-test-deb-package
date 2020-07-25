@@ -15,7 +15,7 @@ Wayland recorder https://askubuntu.com/questions/919807/how-to-change-screencast
 
 /org/gnome/settings-daemon/plugins/media-keys/max-screencast-length
 
-Dconf-Editor gui schemas run edit
+Dconf-Editor gui schemas run edit wayland recorder setting
 
 Use default value - OFF  
 
